@@ -7,6 +7,7 @@ module.exports = {
       extend: {colors: {
         'minha-cor': '#0037AD', // Sua cor personalizada
         'fundo': '#0F1525',
+        'laranja':'#E9501A' 
       },},
     },
     plugins: [],
