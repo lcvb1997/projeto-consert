@@ -11,11 +11,11 @@ export function Banner() {
         contentContainerStyle={{ paddingHorizontal: 16 }}
       >
         {[
-          { id: 1, name: 'Freezers', img: require('../../assets/Rectangle.png') },
-          { id: 2, name: 'Ventiladores', img: require('../../assets/Rectangle.png') },
-          { id: 3, name: 'Smartphones', img: require('../../assets/Rectangle.png') },
-          { id: 4, name: 'Computadores', img: require('../../assets/Rectangle.png') },
-          { id: 5, name: 'Televisores', img: require('../../assets/Rectangle.png') },
+          { id: 1, name: 'Freezers', img: require('../../assets/freezers.png') },
+          { id: 2, name: 'Ventiladores', img: require('../../assets/ventiladores.png') },
+          { id: 3, name: 'Smartphones', img: require('../../assets/celulares.png') },
+          { id: 4, name: 'Computadores', img: require('../../assets/computadores.png') },
+          { id: 5, name: 'Outros', img: require('../../assets/outros.png') },
         ].map((item) => (
           <Pressable
             key={item.id}
