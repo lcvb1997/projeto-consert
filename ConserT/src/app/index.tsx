@@ -22,8 +22,6 @@ const Index = () => {
         <ProfileCard name="Peter Parker" image={require("../assets/Rectangle.png")} rating={5} />
         <ProfileCard name="Raimundo Nonato" image={require("../assets/Rectangle.png")} rating={4} />
       </View>
-      
-      <AdBanner />
 
       <View style={styles.cardsContainer}>
         <ProfileCard name="Romero Brito" image={require("../assets/Rectangle.png")} rating={2} />
