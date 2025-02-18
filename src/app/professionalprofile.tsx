@@ -20,7 +20,7 @@ export default function ProfessionalProfile() {
         <View style={styles.profileCard}>
           <View style={styles.profileTop}>
             
-            <Image source={require('../assets/julio.jpg')} 
+            <Image source={require('../assets/julio.png')} 
               style={styles.avatar}
             />
             <View style={styles.profileInfo}>
