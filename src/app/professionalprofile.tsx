@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 
 export default function ProfessionalProfile() {
@@ -19,7 +19,6 @@ export default function ProfessionalProfile() {
         {/* Profile Section */}
         <View style={styles.profileCard}>
           <View style={styles.profileTop}>
-            
             <Image source={require('../assets/julio.png')} 
               style={styles.avatar}
             />
@@ -66,23 +65,31 @@ export default function ProfessionalProfile() {
           <TouchableOpacity style={styles.socialButtonInstagram}>
             <Text style={styles.socialButtonText}>Instagram</Text>
           </TouchableOpacity>
+
+
+
+          {/* Botão de contratar */}
+          <TouchableOpacity style={styles.hireButton}>
+            <Text style={styles.hireButtonText}>Contratar</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
 
       {/* Barra fixa na parte inferior */}
       <View style={styles.footer}>
         <TouchableOpacity style={styles.footerButton}>
-          <Text style={styles.footerIcon}>🏠</Text>
+          <Image source={require('../assets/home.png')} style={styles.footerIcon} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
-          <Text style={styles.footerIcon}>⭐</Text>
+          <Image source={require('../assets/message.png')} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.hireButton}>
-          <Text style={styles.hireButtonText}>💬</Text>
+        <TouchableOpacity style={styles.footerButton}>
+          <Image source={require('../assets/star.png')} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerProButton}>
-          <Text style={styles.footerProText}>Pro.</Text>
+        <TouchableOpacity style={styles.footerButton}>
+          <Image source={require('../assets/pro.png')} style={styles.footerProIcon} />
         </TouchableOpacity>
+        
       </View>
     </View>
   );
@@ -95,7 +102,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flex: 1,
-    paddingBottom: 110,
+    paddingBottom: 200,
   },
   header: {
     flexDirection: 'row',
@@ -137,32 +144,32 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   name: {
-    fontSize: 20,
+    fontSize: 26,
     fontWeight: 'bold',
   },
   rating: {
-    fontSize: 16,
+    fontSize: 23,
     color: '#000',
   },
   location: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     marginTop: 8,
   },
   address: {
-    fontSize: 14,
+    fontSize: 18,
     marginTop: 4,
   },
   bold: {
     fontWeight: 'bold',
   },
   experience: {
-    marginTop: 12,
-    fontSize: 14,
+    marginTop: 16,
+    fontSize: 16,
   },
   formation: {
-    marginTop: 8,
-    fontSize: 14,
+    marginTop: 18,
+    fontSize: 16,
   },
   serviceIcons: {
     flexDirection: 'row',
@@ -178,74 +185,73 @@ const styles = StyleSheet.create({
 
   socialButtonWhatsapp: {
     backgroundColor: '#25D366',
-    paddingVertical: 10,
+    paddingVertical: 20,
     borderRadius: 30,
     marginTop: 10,
     alignItems: 'center',
   },
   socialButtonFacebook: {
     backgroundColor: '#3b5998',
-    paddingVertical: 10,
+    paddingVertical: 20,
     marginTop: 10,
     borderRadius: 30,
     alignItems: 'center',
   },
   socialButtonInstagram: {
     backgroundColor: '#C13584',
-    paddingVertical: 10,
+    paddingVertical: 20,
     marginTop: 10,
     borderRadius: 30,
     alignItems: 'center',
   },
   socialButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 26,
   },
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 20,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    gap: 20,
+    paddingHorizontal: 40,
+    paddingVertical: 25,
     backgroundColor: '#0044CC', 
     borderTopWidth: 1,
     borderColor: '#ddd',
-    position: 'absolute',
+    marginTop: 'auto',
     bottom: 30, 
-    left: 10,
-    right: 10,
-    borderRadius: 50, 
+    borderRadius: 50,
+    zIndex: 10,
+    width: '85%',
   },
   footerButton: {
     flex: 1,
     alignItems: 'center',
-  },
-  footerProButton: {
-    backgroundColor: '#ff5a32',
-    borderRadius: 30,
-    alignItems: 'center',
-    paddingVertical: 10,
-    marginLeft: 20, // Mais espaço para a direita
-    paddingHorizontal: 20,
+    justifyContent: 'center',
   },
   hireButton: {
     flex: 1,
-    backgroundColor: '#0044CC',
+    backgroundColor: '#E9501A',
     borderRadius: 30,
     alignItems: 'center',
-    paddingVertical: 10,
-    marginLeft: 10,
+    justifyContent: 'center',
+    paddingVertical: 20,
+    marginTop: 20,
+    height: 100,
   },
   hireButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 26,
   },
   footerIcon: {
-    fontSize: 24,
-  },
-  footerProText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
+    width: 25,  // Ajuste se necessário para uma proporção melhor
+    height: 25,
+    resizeMode: 'contain',
+},
+  footerProIcon: {
+      width: 50, 
+      height: 30,
+      resizeMode: 'contain',
   },
 });

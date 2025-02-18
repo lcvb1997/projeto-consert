@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 
 export default function ProfessionalProfile() {
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   },
   socialButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 26,
   },
   footer: {
     flexDirection: 'row',
@@ -222,11 +222,12 @@ const styles = StyleSheet.create({
     bottom: 30, 
     borderRadius: 50,
     zIndex: 10,
-    width: 320
+    width: '85%',
   },
   footerButton: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   hireButton: {
     flex: 1,
@@ -241,13 +242,13 @@ const styles = StyleSheet.create({
   hireButtonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 26,
   },
   footerIcon: {
-    width: 20, 
-    height: 30,
+    width: 25,  // Ajuste se necessário para uma proporção melhor
+    height: 25,
     resizeMode: 'contain',
-  },
+},
   footerProIcon: {
       width: 50, 
       height: 30,
