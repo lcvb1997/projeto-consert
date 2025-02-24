@@ -49,27 +49,27 @@ export default function Profile() {
   return (
     <View style={styles.container}>
       {/* Header */}
-            <View style={styles.header}>
-              <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
-                <MaterialIcons name="arrow-back" size={30} color="white" />         
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.headerLogo}>
-                <Link href="/homepage">
-                  <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-                </Link>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuButton}>
-                <Link href="/perfil">
-                <MaterialIcons name="menu" size={30} color="white" />
-                </Link>
-              </TouchableOpacity>
-            </View>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={30} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.headerLogo}>
+          <Link href="/homepage">
+            <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
+          </Link>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
+          <Link href="/perfil">
+            <MaterialIcons name="menu" size={30} color="white" />
+          </Link>
+        </TouchableOpacity>
+      </View>
 
       {/* Conteúdo do Perfil */}
       <View style={styles.profileContainer}>
         <Image source={require("../assets/profile.png")} style={styles.profileImage} />
         <Text style={styles.usuario}>Usuário01</Text>
-        
+
         {/* Exibição do email */}
         {isEditing ? (
           <>
@@ -89,13 +89,13 @@ export default function Profile() {
         {/* Exibição da cidade */}
         {isEditing ? (
           <>
-          <TextInput
-            style={styles.inputField}
-            value={cidade}
-            onChangeText={setCidade}
-            placeholder="Cidade"
-          />
-          <Text style={styles.hintText}>Digite a região onde você mora.</Text>
+            <TextInput
+              style={styles.inputField}
+              value={cidade}
+              onChangeText={setCidade}
+              placeholder="Cidade"
+            />
+            <Text style={styles.hintText}>Digite a região onde você mora.</Text>
           </>
         ) : (
           <Text style={styles.city}>{cidade}</Text>
@@ -163,8 +163,8 @@ export default function Profile() {
             </TouchableOpacity>
             <TouchableOpacity style={[styles.actionButton, styles.evaluationButton]}>
               <Link href="/avaliacaoservico">
-              <Text style={styles.evaluateButtonText}>Avaliações</Text>
-              </Link>             
+                <Text style={styles.evaluateButtonText}>Avaliações</Text>
+              </Link>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.actionButton, styles.termsButton]}>
               <Text style={styles.termsText}>Termos de Uso</Text>
@@ -177,21 +177,23 @@ export default function Profile() {
       <View style={styles.footer}>
         <TouchableOpacity style={styles.footerButton}>
           <Link href="/homepage">
-          <Image source={require("../assets/home.png")} style={styles.footerIcon} />
+            <Image source={require("../assets/home.png")} style={styles.footerIcon} />
           </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
           <Link href="/orderscreen">
-          <Image source={require("../assets/message.png")} style={styles.footerIcon} />
-          </Link>          
+            <Image source={require("../assets/message.png")} style={styles.footerIcon} />
+          </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
-          <Image source={require("../assets/star.png")} style={styles.footerIcon} />
+          <Link href="/avaliacaoservico">
+            <Image source={require("../assets/star.png")} style={styles.footerIcon} />
+          </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
           <Link href="/telapro">
-          <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
-          </Link>          
+            <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
+          </Link>
         </TouchableOpacity>
       </View>
     </View>

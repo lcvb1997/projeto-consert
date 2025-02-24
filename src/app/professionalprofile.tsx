@@ -44,7 +44,7 @@ export default function ProfessionalProfile() {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back" size={30} color="white" />         
+          <MaterialIcons name="arrow-back" size={30} color="white" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.headerLogo}>
           <Link href="/homepage">
@@ -53,7 +53,7 @@ export default function ProfessionalProfile() {
         </TouchableOpacity>
         <TouchableOpacity style={styles.menuButton}>
           <Link href="/perfil">
-          <MaterialIcons name="person" size={30} color="white" />
+            <MaterialIcons name="person" size={30} color="white" />
           </Link>
         </TouchableOpacity>
       </View>
@@ -110,40 +110,42 @@ export default function ProfessionalProfile() {
           {/* Botão de contratar */}
           <TouchableOpacity style={styles.hireButton}>
             <Link href="/pedido">
-            <Text style={styles.hireButtonText}>Contratar</Text>
-            </Link>            
+              <Text style={styles.hireButtonText}>Contratar</Text>
+            </Link>
           </TouchableOpacity>
 
           {/* Botão de avaliações */}
           <TouchableOpacity style={styles.ratingButton}>
             <Link href="/avaliacaousuario">
-            <Text style={styles.hireButtonText}>Avaliações</Text>
+              <Text style={styles.hireButtonText}>Avaliações</Text>
             </Link>
           </TouchableOpacity>
         </View>
       </ScrollView>
 
       {/* Footer */}
-            <View style={styles.footer}>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/homepage">
-                <Image source={require("../assets/home.png")} style={styles.footerIcon} />
-                </Link>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/orderscreen">
-                <Image source={require("../assets/message.png")} style={styles.footerIcon} />
-                </Link>          
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Image source={require("../assets/star.png")} style={styles.footerIcon} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/telapro">
-                <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
-                </Link>          
-              </TouchableOpacity>
-            </View>
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.footerButton}>
+          <Link href="/homepage">
+            <Image source={require("../assets/home.png")} style={styles.footerIcon} />
+          </Link>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton}>
+          <Link href="/orderscreen">
+            <Image source={require("../assets/message.png")} style={styles.footerIcon} />
+          </Link>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton}>
+          <Link href="/avaliacaoservico">
+            <Image source={require("../assets/star.png")} style={styles.footerIcon} />
+          </Link>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton}>
+          <Link href="/telapro">
+            <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
+          </Link>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

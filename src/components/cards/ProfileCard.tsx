@@ -18,9 +18,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, image, rating }) => {
       </View>
 
       <View style={styles.iconsRow}>
-        <Image source={require('../../assets/freezer.png')} style={styles.icon} />
-        <Image source={require('../../assets/fan.png')} style={styles.icon} />
-        <Image source={require('../../assets/phone.png')} style={styles.icon} />
+        <Image source={require('../../assets/freezer-blue.png')} style={styles.icon} />
+        <Image source={require('../../assets/fan-blue.png')} style={styles.icon} />
+        <Image source={require('../../assets/phone-blue.png')} style={styles.icon} />
       </View>
 
       <View style={styles.starsRow}>
@@ -40,9 +40,11 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, image, rating }) => {
 
 const styles = StyleSheet.create({
   card: {
+    borderWidth: 1,
+    borderColor: '#0037AD',
     width: "48%",
-    backgroundColor: "#112244",
-    borderRadius: 10,
+    backgroundColor: "#fff",
+    borderRadius: 15,
     padding: 16,
     marginBottom: 16,
   },
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   name: {
-    color: "#FFF",
+    color: "#000",
     fontSize: 11,
     fontWeight: "bold",
   },
@@ -81,8 +83,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#FFF",
     backgroundColor: "#0044FF",
-    paddingVertical: 6,
-    borderRadius: 6,
+    paddingVertical: 10,
+    borderRadius: 10,
     fontWeight: "bold",
   },
 });

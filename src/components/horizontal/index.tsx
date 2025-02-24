@@ -1,14 +1,14 @@
-import { View, Text, ScrollView, Pressable, Image } from 'react-native';
+import { View, Text, ScrollView, Pressable, Image, StyleSheet } from 'react-native';
 
 export function Banner() {
   return (
-    <View className="w-full mt-16 mb-4">
-      <Text className="text-center text-white text-lg mb-4">Categorias</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Categorias</Text>
       
       <ScrollView 
         horizontal 
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 16 }}
+        contentContainerStyle={styles.scrollContainer}
       >
         {[
           { id: 1, name: 'Freezers', img: require('../../assets/freezer-blue.png') },
@@ -19,17 +19,49 @@ export function Banner() {
         ].map((item) => (
           <Pressable
             key={item.id}
-            className="items-center mr-4"
+            style={styles.item}
             onPress={() => console.log(`CLICOU EM ${item.name}`)}
           >
             <Image
               source={item.img}
-              className="w-20 h-20 rounded-full bg-blue-700"
+              style={styles.image}
             />
-            <Text className="text-white text-sm mt-2">{item.name}</Text>
+            <Text style={styles.itemName}>{item.name}</Text>
           </Pressable>
         ))}
       </ScrollView>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    marginTop: 16,
+    marginBottom: 4,
+  },
+  title: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 18,
+    marginBottom: 4,
+  },
+  scrollContainer: {
+    paddingHorizontal: 16,
+  },
+  item: {
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  image: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#1E3A8A', // Cor de fundo azul (pode ajustar)
+  },
+  itemName: {
+    color: 'black',
+    fontSize: 12,
+    marginTop: 8,
+  },
+});

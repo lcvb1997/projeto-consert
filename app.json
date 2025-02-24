@@ -1,6 +1,10 @@
 {
   "expo": {
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "name": "ConserT",
     "slug": "ConserT",
     "version": "1.0.0",
@@ -16,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.lucasvdsgn.ConserT"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +42,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "002838cc-8085-4190-a249-3c7c614b54d9"
+      }
     }
   }
 }

@@ -5,7 +5,7 @@ import * as Font from "expo-font"; // Importando a função para carregar fontes
 import { Link } from "expo-router";
 import { useNavigation } from '@react-navigation/native';
 export default function Evaluation() {
-   const [setFontsLoaded] = useState(false); // Estado para saber se as fontes estão carregadas
+  const [setFontsLoaded] = useState(false); // Estado para saber se as fontes estão carregadas
   const [code, setCode] = useState(""); // Estado para o código de confirmação
   const [isServiceContracted, setIsServiceContracted] = useState(false); // Estado para verificar se o serviço foi contratado
   const navigation = useNavigation();
@@ -19,16 +19,16 @@ export default function Evaluation() {
   };
 
   useEffect(() => {
-      const loadFonts = async () => {
-        // Corrigindo o caminho para as fontes
-        await Font.loadAsync({
-          "Funnel-Display": require("../assets/fonts/Funnel-Display.ttf"),  // Caminho ajustado
-          "Sora-Regular": require("../assets/fonts/Sora-Regular.ttf"),      // Caminho ajustado
-        });
-      };
-  
-      loadFonts();
-    }, []); // O useEffect é chamado uma vez quando o componente é montado
+    const loadFonts = async () => {
+      // Corrigindo o caminho para as fontes
+      await Font.loadAsync({
+        "Funnel-Display": require("../assets/fonts/Funnel-Display.ttf"),  // Caminho ajustado
+        "Sora-Regular": require("../assets/fonts/Sora-Regular.ttf"),      // Caminho ajustado
+      });
+    };
+
+    loadFonts();
+  }, []); // O useEffect é chamado uma vez quando o componente é montado
 
   const isButtonDisabled = code.length !== 4; // Verifica se o código tem 4 dígitos
 
@@ -36,20 +36,20 @@ export default function Evaluation() {
     <View style={styles.container}>
       {/* Cabeçalho */}
       <View style={styles.header}>
-              <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
-                <MaterialIcons name="arrow-back" size={30} color="white" />         
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.headerLogo}>
-                <Link href="/homepage">
-                  <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-                </Link>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuButton}>
-                <Link href="/perfil">
-                <MaterialIcons name="person" size={30} color="white" />
-                </Link>
-              </TouchableOpacity>
-            </View>
+        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={30} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.headerLogo}>
+          <Link href="/homepage">
+            <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
+          </Link>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
+          <Link href="/perfil">
+            <MaterialIcons name="person" size={30} color="white" />
+          </Link>
+        </TouchableOpacity>
+      </View>
 
       {/* Descrição de Contratação */}
       <View
@@ -104,12 +104,12 @@ export default function Evaluation() {
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.orderButton}>
                 <Link href="/fila">
-                <Text style={styles.buttonText}>Acompanhar Pedido</Text>
-                </Link>                
+                  <Text style={styles.buttonText}>Acompanhar Pedido</Text>
+                </Link>
               </TouchableOpacity>
               <TouchableOpacity style={styles.homeButton}>
                 <Link href="/homepage">
-                <Text style={styles.buttonText}>Voltar ao Início</Text>
+                  <Text style={styles.buttonText}>Voltar ao Início</Text>
                 </Link>
               </TouchableOpacity>
             </View>
@@ -118,26 +118,28 @@ export default function Evaluation() {
       </View>
 
       {/* Footer */}
-            <View style={styles.footer}>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/homepage">
-                <Image source={require("../assets/home.png")} style={styles.footerIcon} />
-                </Link>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/orderscreen">
-                <Image source={require("../assets/message.png")} style={styles.footerIcon} />
-                </Link>          
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Image source={require("../assets/star.png")} style={styles.footerIcon} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/telapro">
-                <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
-                </Link>          
-              </TouchableOpacity>
-            </View>
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.footerButton}>
+          <Link href="/homepage">
+            <Image source={require("../assets/home.png")} style={styles.footerIcon} />
+          </Link>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton}>
+          <Link href="/orderscreen">
+            <Image source={require("../assets/message.png")} style={styles.footerIcon} />
+          </Link>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton}>
+          <Link href="/avaliacaoservico">
+            <Image source={require("../assets/star.png")} style={styles.footerIcon} />
+          </Link>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton}>
+          <Link href="/telapro">
+            <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
+          </Link>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

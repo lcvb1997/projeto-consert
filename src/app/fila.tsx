@@ -116,7 +116,7 @@ export default function OrderDetails() {
           </Animated.View>
         </View>
         <Text style={styles.orderDescription}>
-          Galaxy S21 está apresentando {"\n"} 
+          Galaxy S21 está apresentando {"\n"}
           problemas na tela. A parte {"\n"}
           superior está com um toque {"\n"}
           fantasma.
@@ -129,19 +129,27 @@ export default function OrderDetails() {
         </TouchableOpacity>
       </View>
 
-      {/* Barra fixa na parte inferior */}
+      {/* Footer */}
       <View style={styles.footer}>
         <TouchableOpacity style={styles.footerButton}>
-          <Image source={require('../assets/home.png')} style={styles.footerIcon} />
+          <Link href="/homepage">
+            <Image source={require("../assets/home.png")} style={styles.footerIcon} />
+          </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
-          <Image source={require('../assets/message.png')} style={styles.footerIcon} />
+          <Link href="/orderscreen">
+            <Image source={require("../assets/message.png")} style={styles.footerIcon} />
+          </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
-          <Image source={require('../assets/star.png')} style={styles.footerIcon} />
+          <Link href="/avaliacaoservico">
+            <Image source={require("../assets/star.png")} style={styles.footerIcon} />
+          </Link>
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
-          <Image source={require('../assets/pro.png')} style={styles.footerProIcon} />
+          <Link href="/telapro">
+            <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
+          </Link>
         </TouchableOpacity>
       </View>
     </View>
@@ -235,7 +243,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignSelf: "flex-start",
     justifyContent: "center",
-    flexDirection: "row", 
+    flexDirection: "row",
     alignItems: "center",
     width: 100, // Largura fixa para garantir que o statusContainer não ultrapasse os limites
   },

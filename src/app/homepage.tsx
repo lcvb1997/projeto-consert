@@ -1,8 +1,7 @@
 import React, { useState, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import Pesquisar from "../components/pesquisar";
 import { Banner } from "../components/horizontal";
 import ProfileCard from "../components/cards/ProfileCard";
 
@@ -37,10 +36,9 @@ const HomePage = () => {
       {isDropdownVisible && ( 
         <View style={styles.dropdownMenu}>
           <TouchableOpacity style={styles.dropdownItem}>
-          <Link href='/closedorder'>
-          <Text style={styles.dropdownText}>Pedidos Concluídos</Text>
-          </Link>
-           
+            <Link href='/closedorder'>
+              <Text style={styles.dropdownText}>Pedidos Concluídos</Text>
+            </Link>
           </TouchableOpacity>
           <TouchableOpacity style={styles.dropdownItem}>
             <Text style={styles.dropdownText}>Configurações</Text>
@@ -52,11 +50,23 @@ const HomePage = () => {
       )}
 
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        {/* Botões de Pesquisa e Local */}
+        <View style={styles.searchBarContainer}>
+          <TouchableOpacity style={[styles.button, styles.searchButton]}>
+            <MaterialIcons name="search" size={20} color="white" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={[styles.button, styles.locationButton]}>
+            <MaterialIcons name="location-on" size={20} color="white" />
+          </TouchableOpacity>
+        </View>
+
+        {/* Banner de Categorias */}
         <View style={styles.section}>
-          <Pesquisar />
           <Banner />
         </View>
 
+        {/* Profile Cards */}
         <View style={styles.cardsContainer}>
           <ProfileCard name="Júlio Cavalcante" image={require("../assets/julio.png")} rating={5} />
         </View>
@@ -65,6 +75,29 @@ const HomePage = () => {
           {/* Outros Conteúdos */}
         </View>
       </ScrollView>
+      {/* Footer */}
+            <View style={styles.footer}>
+              <TouchableOpacity style={styles.footerButton}>
+                <Link href="/homepage">
+                <Image source={require("../assets/home.png")} style={styles.footerIcon} />
+                </Link>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.footerButton}>
+                <Link href="/orderscreen">
+                <Image source={require("../assets/message.png")} style={styles.footerIcon} />
+                </Link>          
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.footerButton}>
+                <Link href="/avaliacaoservico">
+                <Image source={require("../assets/star.png")} style={styles.footerIcon} />
+                </Link>                
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.footerButton}>
+                <Link href="/telapro">
+                <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
+                </Link>          
+              </TouchableOpacity>
+            </View>
     </View>
   );
 };
@@ -72,12 +105,7 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0A0F24",
-  },
-  scrollContent: {
-    flex: 1,
-    paddingBottom: 200,
-    marginTop: 60,
+    backgroundColor: "#fff",
   },
   header: {
     position: 'absolute',
@@ -103,16 +131,12 @@ const styles = StyleSheet.create({
   headerLogo: {
     width: 120,
   },
-  footerButton: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   section: {
-    paddingHorizontal: 16,
-    paddingTop: 100,
+    paddingHorizontal: 0,
+    paddingTop: 10,
   },
   cardsContainer: {
+    marginTop: 20,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
@@ -120,22 +144,74 @@ const styles = StyleSheet.create({
   },
   dropdownMenu: {
     position: 'absolute',
-    top: 60, // Agora o menu está logo abaixo do botão de menu
+    top: 60,
     backgroundColor: '#fff',
-    width: 150,  // Largura ajustada
+    width: 150,
     borderRadius: 8,
-    elevation: 5, // Sombra para o efeito de modal
+    elevation: 5,
     zIndex: 20,
   },
   dropdownItem: {
-    paddingVertical: 8, // Tamanho menor para os itens
+    paddingVertical: 8,
     alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: '#ddd',
   },
   dropdownText: {
-    fontSize: 14,  // Fonte menor
+    fontSize: 14,
     color: '#333',
+  },
+  searchBarContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 10, // Reduzido para diminuir a distância
+    paddingTop: 100, // Ajuste o topo para distanciar os campos
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 12,
+    borderRadius: 50,
+    height: 50,
+    width: 120,
+  },
+  searchButton: {
+    backgroundColor: '#E9501A',
+  },
+  locationButton: {
+    backgroundColor: '#0037AD',
+  },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignSelf: "center",
+    gap: 20,
+    paddingHorizontal: 40,
+    paddingVertical: 25,
+    backgroundColor: "#E9501A",
+    borderTopWidth: 1,
+    borderColor: "#ddd",
+    marginTop: "auto",
+    bottom: 30,
+    borderRadius: 50,
+    zIndex: 10,
+    width: "85%",
+  },
+  footerButton: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  footerIcon: {
+    width: 25,
+    height: 25,
+    resizeMode: "contain",
+  },
+  footerProIcon: {
+    width: 50,
+    height: 30,
+    resizeMode: "contain",
   },
 });
 
