@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Link } from 'expo-router';
+import * as Font from 'expo-font';
 
 const HelloScreen = () => {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadFonts = async () => {
+      await Font.loadAsync({
+        'Funnel-Display': require('../assets/fonts/Funnel-Display.ttf'),
+        'Sora-Regular': require('../assets/fonts/Sora-Regular.ttf'),
+      });
+      setFontsLoaded(true);
+    };
+
+    loadFonts();
+  }, []);
+
+  if (!fontsLoaded) {
+    return null; // Não renderiza nada enquanto as fontes não estiverem carregadas
+  }
+
   return (
     <View style={styles.container}>
       <Image
@@ -12,11 +32,15 @@ const HelloScreen = () => {
       <Text style={styles.subtitle}>Cadastre-se ou realize {"\n"} o login para continuar</Text>
 
       <TouchableOpacity style={styles.loginButton}>
-        <Text style={styles.buttonText}>Login</Text>
+        <Link href="/loginscreen" style={styles.link}>
+          <Text style={styles.buttonText}>Login</Text>
+        </Link>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.signUpButton}>
-        <Text style={styles.buttonText}>criar conta</Text>
+        <Link href="/signupscreen" style={styles.link}>
+          <Text style={styles.buttonText}>Criar conta</Text>
+        </Link>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.continueWithoutLoginButton}>
@@ -44,6 +68,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     marginBottom: 40,
+    fontFamily: 'Sora-Regular', // Fonte Sora para o subtítulo
   },
   loginButton: {
     width: '80%',
@@ -71,11 +96,18 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: 'normal',
+    fontFamily: 'Sora-Regular', // Fonte Funnel Display para os botões
   },
   continueText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 14,
+    fontFamily: 'Sora-Regular', // Fonte Sora para o texto
+  },
+  link: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
 

@@ -1,7 +1,15 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
+import {Link} from 'expo-router';
 
-const ProfileCard = ({ name, image, rating }) => {
+// Definir os tipos das props
+interface ProfileCardProps {
+  name: string;
+  image: any;
+  rating: number;
+}
+
+const ProfileCard: React.FC<ProfileCardProps> = ({ name, image, rating }) => {
   return (
     <View style={styles.card}>
       <View style={styles.topSection}>
@@ -10,18 +18,22 @@ const ProfileCard = ({ name, image, rating }) => {
       </View>
 
       <View style={styles.iconsRow}>
-        <Text style={styles.icon}>🔧</Text>
-        <Text style={styles.icon}>💻</Text>
-        <Text style={styles.icon}>📱</Text>
+        <Image source={require('../../assets/freezer.png')} style={styles.icon} />
+        <Image source={require('../../assets/fan.png')} style={styles.icon} />
+        <Image source={require('../../assets/phone.png')} style={styles.icon} />
       </View>
 
       <View style={styles.starsRow}>
-      {[...Array(rating)].map((_, index) => (
-        <Text key={index}>⭐</Text>
-      ))}
+        {[...Array(Math.floor(rating))].map((_, index) => (
+          <Text key={index}>⭐</Text>
+        ))}
       </View>
-
-      <Text style={styles.button}>Perfil</Text>
+      
+      <Text style={styles.button}>
+        <Link href="/professionalprofile">
+        Perfil
+        </Link>
+      </Text>
     </View>
   );
 };
@@ -56,7 +68,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   icon: {
-    fontSize: 16,
+    height: 20,
+    width: 20,
     marginHorizontal: 4,
   },
   starsRow: {
@@ -64,12 +77,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 8,
   },
-  star: {
-    fontSize: 16,
-  },
   button: {
     textAlign: "center",
-    color: "minha-cor",
+    color: "#FFF",
     backgroundColor: "#0044FF",
     paddingVertical: 6,
     borderRadius: 6,

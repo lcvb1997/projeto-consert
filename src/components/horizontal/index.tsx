@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Pressable, Image } from 'react-native';
 export function Banner() {
   return (
     <View className="w-full mt-16 mb-4">
-      <Text className="text-center text-white text-lg mb-4">categorias</Text>
+      <Text className="text-center text-white text-lg mb-4">Categorias</Text>
       
       <ScrollView 
         horizontal 
@@ -11,11 +11,11 @@ export function Banner() {
         contentContainerStyle={{ paddingHorizontal: 16 }}
       >
         {[
-          { id: 1, name: 'Freezers', img: require('../../assets/Rectangle.png') },
-          { id: 2, name: 'Ventiladores', img: require('../../assets/Rectangle.png') },
-          { id: 3, name: 'Smartphones', img: require('../../assets/Rectangle.png') },
-          { id: 4, name: 'Computadores', img: require('../../assets/Rectangle.png') },
-          { id: 5, name: 'Televisores', img: require('../../assets/Rectangle.png') },
+          { id: 1, name: 'Freezers', img: require('../../assets/freezer-blue.png') },
+          { id: 2, name: 'Ventiladores', img: require('../../assets/fan-blue.png') },
+          { id: 3, name: 'Smartphones', img: require('../../assets/phone-blue.png') },
+          { id: 4, name: 'Computadores', img: require('../../assets/pc-blue.png') },
+          { id: 5, name: 'Outros', img: require('../../assets/other-blue.png') },
         ].map((item) => (
           <Pressable
             key={item.id}

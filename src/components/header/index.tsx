@@ -1,5 +1,5 @@
 import { View, Pressable, Text, Image } from 'react-native';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 
 
 
