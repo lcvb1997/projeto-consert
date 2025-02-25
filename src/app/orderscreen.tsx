@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { useRouter } from 'expo-router';
 import { useNavigation } from '@react-navigation/native';
 
 const orders = [
@@ -24,25 +24,25 @@ const orders = [
 
 export default function OrdersScreen() {
   const navigation = useNavigation();
+  const router = useRouter(); // Inicializa o useRouter
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-              <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
-                  <MaterialIcons name="arrow-back" size={30} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.headerLogo}>
-                <Link href="/homepage">
-                  <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-                </Link>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuButton}>
-                <MaterialIcons name="search" size={30} color="white" />
-              </TouchableOpacity>
-            </View>
+        <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={30} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.headerLogo} onPress={() => router.push("/homepage")}>
+          <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
+          <MaterialIcons name="search" size={30} color="white" />
+        </TouchableOpacity>
+      </View>
 
-            <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView contentContainerStyle={styles.content}>
         {orders.map((order, index) => (
-          <Link key={index} href="/fila"> {/* Usando caminho fixo diretamente */}
+          <TouchableOpacity key={index} onPress={() => router.push("/fila")}>
             <View style={styles.card}>
               <View style={styles.cardHeader}>
                 <Text style={styles.cardTitle}>{order.status}</Text>
@@ -50,12 +50,13 @@ export default function OrdersScreen() {
               </View>
               <Text style={styles.cardDescription}>{order.description}</Text>
             </View>
-          </Link>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

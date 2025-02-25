@@ -1,43 +1,11 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
-import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-
-interface Profissional {
-  id: number;
-  nome: string;
-  cidade: string;
-  descricao: string;
-  formacao: string;
-}
+import { useRouter } from 'expo-router';
 
 export default function ProfessionalProfile() {
-  const [data, setData] = useState<Profissional | null>(null);
-  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-
-  useEffect(() => {
-    fetch('http://localhost:5000/profissionais/1') // Exemplo de busca por ID específico
-      .then((response) => response.json())
-      .then((json) => {
-        setData(json);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar dados:', error);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return <Text style={styles.loading}>Carregando...</Text>;
-  }
-
-  if (!data) {
-    return <Text style={styles.loading}>Nenhum dado encontrado.</Text>;
-  }
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
@@ -46,15 +14,11 @@ export default function ProfessionalProfile() {
         <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={30} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.headerLogo}>
-          <Link href="/homepage">
-            <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-          </Link>
+        <TouchableOpacity style={styles.headerLogo} onPress={() => router.push('/homepage')}>
+          <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-          <Link href="/perfil">
-            <MaterialIcons name="person" size={30} color="white" />
-          </Link>
+        <TouchableOpacity style={styles.menuButton} onPress={() => router.push('/perfil')}>
+          <MaterialIcons name="person" size={30} color="white" />
         </TouchableOpacity>
       </View>
 
@@ -65,19 +29,19 @@ export default function ProfessionalProfile() {
           <View style={styles.profileTop}>
             <Image source={require('../assets/julio.png')} style={styles.avatar} />
             <View style={styles.profileInfo}>
-              <Text style={styles.name}>{data.nome}</Text>
+              <Text style={styles.name}>Júlio Cavalcante</Text>
               <Text style={styles.rating}>★★★★★</Text>
             </View>
           </View>
 
-          <Text style={styles.location}>{data.cidade}</Text>
+          <Text style={styles.location}>Quixadá-CE</Text>
           <Text style={styles.address}><Text style={styles.bold}>Endereço:</Text> Rua José Maria 123</Text>
 
           <Text style={styles.experience}>
-            <Text style={styles.bold}>Experiência:</Text> {data.descricao}
+            <Text style={styles.bold}>Experiência:</Text> 8 anos de experiência no setor de reparos eletrônicos com especialidade em Reparos de smartphones, tablets, notebooks, TVs de LED.
           </Text>
           <Text style={styles.formation}>
-            <Text style={styles.bold}>Formação:</Text> {data.formacao}
+            <Text style={styles.bold}>Formação:</Text> Curso Técnico em Eletrônica pelo SENAI.
           </Text>
 
           {/* Ícones de Serviços */}
@@ -108,47 +72,36 @@ export default function ProfessionalProfile() {
           </TouchableOpacity>
 
           {/* Botão de contratar */}
-          <TouchableOpacity style={styles.hireButton}>
-            <Link href="/pedido">
-              <Text style={styles.hireButtonText}>Contratar</Text>
-            </Link>
+          <TouchableOpacity style={styles.hireButton} onPress={() => router.push('/pedido')}>
+            <Text style={styles.hireButtonText}>Contratar</Text>
           </TouchableOpacity>
 
           {/* Botão de avaliações */}
-          <TouchableOpacity style={styles.ratingButton}>
-            <Link href="/avaliacaousuario">
-              <Text style={styles.hireButtonText}>Avaliações</Text>
-            </Link>
+          <TouchableOpacity style={styles.ratingButton} onPress={() => router.push('/avaliacaousuario')}>
+            <Text style={styles.hireButtonText}>Avaliações</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
 
       {/* Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/homepage">
-            <Image source={require("../assets/home.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push('/homepage')}>
+          <Image source={require("../assets/home.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/orderscreen">
-            <Image source={require("../assets/message.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push('/orderscreen')}>
+          <Image source={require("../assets/message.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/avaliacaoservico">
-            <Image source={require("../assets/star.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push('/avaliacaoservico')}>
+          <Image source={require("../assets/star.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/telapro">
-            <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push('/telapro')}>
+          <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
         </TouchableOpacity>
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

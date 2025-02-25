@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import {Link} from 'expo-router';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useRouter } from 'expo-router';
 
 // Definir os tipos das props
 interface ProfileCardProps {
@@ -10,6 +10,8 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ name, image, rating }) => {
+  const router = useRouter();
+
   return (
     <View style={styles.card}>
       <View style={styles.topSection}>
@@ -29,11 +31,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, image, rating }) => {
         ))}
       </View>
       
-      <Text style={styles.button}>
-        <Link href="/professionalprofile">
-        Perfil
-        </Link>
-      </Text>
+      <TouchableOpacity onPress={() => router.push('/professionalprofile')}>
+        <Text style={styles.button}>Perfil</Text>
+      </TouchableOpacity>
     </View>
   );
 };

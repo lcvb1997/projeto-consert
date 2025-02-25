@@ -1,36 +1,37 @@
 import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import * as Font from "expo-font"; // Importando a função para carregar fontes
-import { Link } from "expo-router";
+import * as Font from "expo-font"; 
 import { useNavigation } from '@react-navigation/native';
+import { useRouter } from "expo-router";
+
 export default function Evaluation() {
-  const [setFontsLoaded] = useState(false); // Estado para saber se as fontes estão carregadas
-  const [code, setCode] = useState(""); // Estado para o código de confirmação
-  const [isServiceContracted, setIsServiceContracted] = useState(false); // Estado para verificar se o serviço foi contratado
+  const [setFontsLoaded] = useState(false);
+  const [code, setCode] = useState(""); 
+  const [isServiceContracted, setIsServiceContracted] = useState(false);
   const navigation = useNavigation();
+  const router = useRouter();
 
   const handleGoBack = () => {
     // Função de voltar ao início
   };
 
   const handleContractService = () => {
-    setIsServiceContracted(true); // Marca que o serviço foi contratado
+    setIsServiceContracted(true); 
   };
 
   useEffect(() => {
     const loadFonts = async () => {
-      // Corrigindo o caminho para as fontes
       await Font.loadAsync({
-        "Funnel-Display": require("../assets/fonts/Funnel-Display.ttf"),  // Caminho ajustado
-        "Sora-Regular": require("../assets/fonts/Sora-Regular.ttf"),      // Caminho ajustado
+        "Funnel-Display": require("../assets/fonts/Funnel-Display.ttf"),  
+        "Sora-Regular": require("../assets/fonts/Sora-Regular.ttf"),      
       });
     };
 
     loadFonts();
-  }, []); // O useEffect é chamado uma vez quando o componente é montado
+  }, []);
 
-  const isButtonDisabled = code.length !== 4; // Verifica se o código tem 4 dígitos
+  const isButtonDisabled = code.length !== 4;
 
   return (
     <View style={styles.container}>
@@ -39,21 +40,17 @@ export default function Evaluation() {
         <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={30} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.headerLogo}>
-          <Link href="/homepage">
-            <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-          </Link>
+        <TouchableOpacity style={styles.headerLogo} onPress={() => router.push("/homepage")}>
+          <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-          <Link href="/perfil">
-            <MaterialIcons name="person" size={30} color="white" />
-          </Link>
+        <TouchableOpacity style={styles.menuButton} onPress={() => router.push("/perfil")}>
+          <MaterialIcons name="person" size={30} color="white" />
         </TouchableOpacity>
       </View>
 
       {/* Descrição de Contratação */}
       <View
-        style={[styles.evaluationCard, isServiceContracted && styles.successCard]} // Altera o estilo quando o serviço for contratado
+        style={[styles.evaluationCard, isServiceContracted && styles.successCard]}
       >
         {!isServiceContracted ? (
           <>
@@ -69,12 +66,12 @@ export default function Evaluation() {
             {/* Campo de código de confirmação */}
             <TextInput
               style={styles.codeInput}
-              maxLength={4} // Limita a 4 dígitos
+              maxLength={4} 
               keyboardType="numeric"
               value={code}
               onChangeText={setCode}
               placeholder="_ _ _ _"
-              placeholderTextColor="#B0B0B0" // Cor para o placeholder
+              placeholderTextColor="#B0B0B0"
             />
 
             {/* Botão de Contratar Serviço */}
@@ -88,10 +85,7 @@ export default function Evaluation() {
           </>
         ) : (
           <>
-            <Text style={[styles.title]}>
-              Novo Serviço
-            </Text>
-            {/* Conteúdo após a contratação do serviço */}
+            <Text style={[styles.title]}>Novo Serviço</Text>
             <Image source={require('../assets/success.png')} style={styles.successImage} />
             <Text style={[styles.descriptionText, styles.successText]}>
               Serviço cadastrado com sucesso
@@ -102,15 +96,11 @@ export default function Evaluation() {
 
             {/* Botões abaixo do texto */}
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.orderButton}>
-                <Link href="/fila">
-                  <Text style={styles.buttonText}>Acompanhar Pedido</Text>
-                </Link>
+              <TouchableOpacity style={styles.orderButton} onPress={() => router.push("/fila")}>
+                <Text style={styles.buttonText}>Acompanhar Pedido</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.homeButton}>
-                <Link href="/homepage">
-                  <Text style={styles.buttonText}>Voltar ao Início</Text>
-                </Link>
+              <TouchableOpacity style={styles.homeButton} onPress={() => router.push("/homepage")}>
+                <Text style={styles.buttonText}>Voltar ao Início</Text>
               </TouchableOpacity>
             </View>
           </>
@@ -119,25 +109,17 @@ export default function Evaluation() {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/homepage">
-            <Image source={require("../assets/home.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/homepage")}>
+          <Image source={require("../assets/home.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/orderscreen">
-            <Image source={require("../assets/message.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/orderscreen")}>
+          <Image source={require("../assets/message.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/avaliacaoservico">
-            <Image source={require("../assets/star.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/avaliacaoservico")}>
+          <Image source={require("../assets/star.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/telapro">
-            <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/telapro")}>
+          <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
         </TouchableOpacity>
       </View>
     </View>

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Image, View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import * as Font from "expo-font"; // Importa a API de fontes do Expo
-import {useNavigation } from '@react-navigation/native';
-import { Link } from "expo-router";
+import * as Font from "expo-font";
+import { useRouter } from "expo-router";
 
 const orders = [
   {
@@ -24,9 +23,8 @@ const orders = [
 ];
 
 export default function OrdersScreen() {
-  const [fontsLoaded, setFontsLoaded] = useState(false); // Estado para verificar se as fontes foram carregadas
-  const navigation = useNavigation();
-
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const loadFonts = async () => {
@@ -34,33 +32,30 @@ export default function OrdersScreen() {
         "Funnel-Display": require("../assets/fonts/Funnel-Display.ttf"),
         "Sora-Regular": require("../assets/fonts/Sora-Regular.ttf"),
       });
-      setFontsLoaded(true); // Marca que as fontes foram carregadas
+      setFontsLoaded(true);
     };
 
     loadFonts();
   }, []);
 
   if (!fontsLoaded) {
-    return null; // Renderiza nada enquanto as fontes estão sendo carregadas
+    return null;
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-                    <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
-                        <MaterialIcons name="arrow-back" size={30} color="white" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.headerLogo}>
-                      <Link href="/homepage">
-                        <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-                      </Link>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuButton}>
-                      <MaterialIcons name="search" size={30} color="white" />
-                    </TouchableOpacity>
-                  </View>
+        <TouchableOpacity style={styles.menuButton} onPress={() => router.back()}>
+          <MaterialIcons name="arrow-back" size={30} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.headerLogo} onPress={() => router.push("/homepage")}> 
+          <Image source={require("../assets/logo_blue.png")} style={styles.headerLogo} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuButton}>
+          <MaterialIcons name="search" size={30} color="white" />
+        </TouchableOpacity>
+      </View>
 
-      {/* Adicionando o texto "Pedidos" */}
       <Text style={styles.title}>Pedidos Concluídos</Text>
 
       <ScrollView contentContainerStyle={styles.content}>
@@ -85,14 +80,14 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#0039A6",
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     zIndex: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     height: 60,
     paddingHorizontal: 10,
   },
@@ -112,7 +107,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginVertical: 16,
     color: "#000",
-    fontFamily: "Funnel-Display", // Fonte Funnel Display para negrito
+    fontFamily: "Funnel-Display",
     fontWeight: "bold",
   },
   card: {
@@ -133,13 +128,13 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 16,
-    fontFamily: "Funnel-Display", // Fonte Funnel Display para negrito
+    fontFamily: "Funnel-Display",
     fontWeight: "bold",
   },
   cardDescription: {
     fontSize: 14,
     color: "#555",
-    fontFamily: "Sora-Regular", // Fonte Sora para o restante
+    fontFamily: "Sora-Regular",
   },
   statusIndicator: {
     width: 40,

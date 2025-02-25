@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Font from "expo-font"; // Importa a API de fontes do Expo
-import { Link } from "expo-router";
+import { useRouter } from "expo-router"; // Substitui Link pelo useRouter
+import { useNavigation } from '@react-navigation/native';
 
 export default function Evaluation() {
   const [rating, setRating] = useState(0); // Avaliação em estrelas
   const [description, setDescription] = useState(""); // Descrição da avaliação
   const [isSubmitted, setIsSubmitted] = useState(false); // Estado para verificar se a avaliação foi enviada
   const [fontsLoaded, setFontsLoaded] = useState(false); // Estado para verificar se as fontes foram carregadas
+  const router = useRouter(); // Inicializa o useRouter
+  const navigation = useNavigation();
 
   useEffect(() => {
     const loadFonts = async () => {
@@ -42,9 +45,9 @@ export default function Evaluation() {
     <View style={styles.container}>
       {/* Cabeçalho */}
       <View style={styles.header}>
-        <MaterialIcons name="arrow-back" size={24} color="white" />
+        <MaterialIcons name="arrow-back" size={24} color="white" onPress={() => navigation.goBack()} />
         <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-        <MaterialIcons name="person" size={24} color="white" />
+        <MaterialIcons name="person" size={24} color="white" onPress={() => router.push("/perfil")} />
       </View>
 
       {/* Informações do Cliente */}
@@ -94,39 +97,32 @@ export default function Evaluation() {
           <View style={styles.successContent}>
             <Image source={require('../assets/success.png')} style={styles.successImage} />
             <Text style={styles.successText}>Serviço avaliado com sucesso!</Text>
-            <TouchableOpacity style={styles.goBackButton}>
-              <Link href="/homepage">
+            <TouchableOpacity style={styles.goBackButton} onPress={() => router.push("/homepage")}>
               <Text style={styles.goBackButtonText}>Voltar ao Início</Text>
-              </Link>              
             </TouchableOpacity>
           </View>
         )}
       </View>
 
       {/* Footer */}
-            <View style={styles.footer}>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/homepage">
-                <Image source={require("../assets/home.png")} style={styles.footerIcon} />
-                </Link>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/orderscreen">
-                <Image source={require("../assets/message.png")} style={styles.footerIcon} />
-                </Link>          
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Image source={require("../assets/star.png")} style={styles.footerIcon} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.footerButton}>
-                <Link href="/telapro">
-                <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
-                </Link>          
-              </TouchableOpacity>
-            </View>
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/homepage")}>
+          <Image source={require("../assets/home.png")} style={styles.footerIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/orderscreen")}>
+          <Image source={require("../assets/message.png")} style={styles.footerIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton}>
+          <Image source={require("../assets/star.png")} style={styles.footerIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/telapro")}>
+          <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
+
 
 // Estilos da tela
 const styles = StyleSheet.create({

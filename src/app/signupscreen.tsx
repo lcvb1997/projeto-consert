@@ -1,17 +1,18 @@
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import {Link} from 'expo-router';
-import {Linking} from 'react-native';
+import { useRouter } from 'expo-router';
+import { Linking } from 'react-native';
 
 const SignupScreen: React.FC = () => {
+  const router = useRouter(); // Inicializa o useRouter
+
   return (
     <View style={styles.container}>
 
-      <TouchableOpacity style={styles.backButton}>
-        <Link href="/helloscreen">
-          <FontAwesome name="arrow-left" size={24} color="white" />
-        </Link>
-          </TouchableOpacity>
+      <TouchableOpacity style={styles.backButton} onPress={() => router.push("/helloscreen")}>
+        <FontAwesome name="arrow-left" size={24} color="white" />
+      </TouchableOpacity>
+
       <Image source={require('../assets/logo.png')} style={styles.logo} />
       <Text style={styles.title}>Cadastro</Text>
       <Text style={styles.subtitle}>Preencha os dados</Text>
@@ -31,11 +32,8 @@ const SignupScreen: React.FC = () => {
         <FontAwesome name="eye" size={20} color="black" style={styles.eyeIcon} />
       </View>
       
-      <TouchableOpacity style={styles.signupButton}>
-        <Link href="/loginscreen">
+      <TouchableOpacity style={styles.signupButton} onPress={() => router.push("/loginscreen")}>
         <Text style={styles.buttonText}>Criar nova conta</Text>
-        </Link>
-        
       </TouchableOpacity>
       
       <Text style={styles.orText}>Ou cadastre-se com</Text>
@@ -51,13 +49,14 @@ const SignupScreen: React.FC = () => {
       </TouchableOpacity>
       
       <Text style={styles.footerText}>Já possui uma conta?
-        <Link href="/loginscreen">
+        <TouchableOpacity onPress={() => router.push("/loginscreen")}>
           <Text style={styles.loginText}> Faça login</Text>
-        </Link>
+        </TouchableOpacity>
       </Text>
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

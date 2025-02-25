@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Font from "expo-font";
-import { Link } from "expo-router";
 import { useNavigation } from '@react-navigation/native';
+import { useRouter } from "expo-router";
 
 export default function Profile() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -13,6 +13,7 @@ export default function Profile() {
   const [confirmSenha, setConfirmSenha] = useState("");
   const [cidade, setCidade] = useState("Quixadá-CE");
   const navigation = useNavigation();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false); // Controle de visibilidade da senha
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Controle de visibilidade da confirmação de senha
 
@@ -53,15 +54,11 @@ export default function Profile() {
         <TouchableOpacity style={styles.menuButton} onPress={() => navigation.goBack()}>
           <MaterialIcons name="arrow-back" size={30} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.headerLogo}>
-          <Link href="/homepage">
-            <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-          </Link>
+        <TouchableOpacity style={styles.headerLogo} onPress={() => router.push("/homepage")}>
+          <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-          <Link href="/perfil">
-            <MaterialIcons name="menu" size={30} color="white" />
-          </Link>
+        <TouchableOpacity style={styles.menuButton} onPress={() => router.push("/perfil")}>
+          <MaterialIcons name="menu" size={30} color="white" />
         </TouchableOpacity>
       </View>
 
@@ -156,15 +153,11 @@ export default function Profile() {
         {/* Botões de Ações */}
         {!isEditing && (
           <>
-            <TouchableOpacity style={styles.actionButton}>
-              <Link href="/orderscreen">
-                <Text style={styles.buttonText}>Pedidos</Text>
-              </Link>
+            <TouchableOpacity style={styles.actionButton} onPress={() => router.push("/orderscreen")}>
+              <Text style={styles.buttonText}>Pedidos</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.actionButton, styles.evaluationButton]}>
-              <Link href="/avaliacaoservico">
-                <Text style={styles.evaluateButtonText}>Avaliações</Text>
-              </Link>
+            <TouchableOpacity style={[styles.actionButton, styles.evaluationButton]} onPress={() => router.push("/avaliacaoservico")}>
+              <Text style={styles.evaluateButtonText}>Avaliações</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.actionButton, styles.termsButton]}>
               <Text style={styles.termsText}>Termos de Uso</Text>
@@ -175,25 +168,17 @@ export default function Profile() {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/homepage">
-            <Image source={require("../assets/home.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/homepage")}>
+          <Image source={require("../assets/home.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/orderscreen">
-            <Image source={require("../assets/message.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/orderscreen")}>
+          <Image source={require("../assets/message.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/avaliacaoservico">
-            <Image source={require("../assets/star.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/avaliacaoservico")}>
+          <Image source={require("../assets/star.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/telapro">
-            <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/telapro")}>
+          <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
         </TouchableOpacity>
       </View>
     </View>

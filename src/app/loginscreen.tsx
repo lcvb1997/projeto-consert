@@ -1,16 +1,15 @@
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import {Link} from 'expo-router';
-import {Linking} from 'react-native';
+import { useRouter } from 'expo-router';
+import { Linking } from 'react-native';
 
 const LoginScreen: React.FC = () => {
+  const router = useRouter(); // Inicializa o useRouter
+
   return (
     <View style={styles.container}>
-
-      <TouchableOpacity style={styles.backButton}>
-        <Link href="/helloscreen">
-          <FontAwesome name="arrow-left" size={24} color="white" />
-        </Link>
+      <TouchableOpacity style={styles.backButton} onPress={() => router.push("/helloscreen")}>
+        <FontAwesome name="arrow-left" size={24} color="white" />
       </TouchableOpacity>
 
       <Image source={require('../assets/logo.png')} style={styles.logo} />
@@ -31,32 +30,30 @@ const LoginScreen: React.FC = () => {
         <Text style={styles.rememberText}>Lembrar login</Text>
       </View>
       
-      <TouchableOpacity style={styles.loginButton}>
-        <Link href="/homepage">
+      <TouchableOpacity style={styles.loginButton} onPress={() => router.push("/homepage")}>
         <Text style={styles.buttonText}>ENTRAR</Text>
-        </Link>
       </TouchableOpacity>
       
       <Text style={styles.orText}>Ou realize o login com</Text>
       
-      <TouchableOpacity style={styles.socialButton} onPress={() => Linking.openURL('https://www.facebook.com/?stype=lo&flo=1&deoia=1&jlou=Afefquq9xHx99tTvyA7-l3GBAHF6jNVN_Ryx4jMbb7AduQEmK6txneCVrBAk4kfWnoEZ7EDX8bA3BHHpJc8x93fiy8U5Mkcio_qVjmVPACVnmA&smuh=27579&lh=Ac_LMJPQJmLW56db32c')}>
-              <Image source={require('../assets/facebook.png')} style={styles.socialIcon} />
-              <Text style={styles.socialText}>Entrar com Facebook</Text>
-            </TouchableOpacity>
+      <TouchableOpacity style={styles.socialButton} onPress={() => Linking.openURL('https://www.facebook.com')}>
+        <Image source={require('../assets/facebook.png')} style={styles.socialIcon} />
+        <Text style={styles.socialText}>Entrar com Facebook</Text>
+      </TouchableOpacity>
             
-            <TouchableOpacity style={styles.socialButton} onPress={() => Linking.openURL('https://accounts.google.com/InteractiveLogin/signinchooser?elo=1&ifkv=ASSHykqxqylYRuVyWBGkdBAVuQIfi2JZN6eG3vwgjrxPFC31wjfP6GN4A567se7NloYYEbLvsPhV&ddm=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin')}>
-              <Image source={require('../assets/google.png')} style={styles.socialIcon} />
-              <Text style={styles.socialText}>Entrar com Google</Text>
-            </TouchableOpacity>
+      <TouchableOpacity style={styles.socialButton} onPress={() => Linking.openURL('https://accounts.google.com')}>
+        <Image source={require('../assets/google.png')} style={styles.socialIcon} />
+        <Text style={styles.socialText}>Entrar com Google</Text>
+      </TouchableOpacity>
       
-      <Text style={styles.footerText}>Não tem uma conta?
-        <Link href="/signupscreen">
-          <Text style={styles.signupText}> Cadastre-se</Text>
-        </Link>
+      <Text style={styles.footerText}>
+        Não tem uma conta?
+        <Text style={styles.signupText} onPress={() => router.push("/signupscreen")}> Cadastre-se</Text>
       </Text>
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   logo: {

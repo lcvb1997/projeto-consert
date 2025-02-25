@@ -2,17 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, Animated, Easing } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Font from "expo-font"; // Importa a API de fontes do Expo
-import { Link, useRouter } from "expo-router"; // Usando useRouter para navegação
+import { useRouter } from "expo-router"; // Usando useRouter para navegação
 
 export default function OrderDetails() {
-  const [containerWidth, setContainerWidth] = useState(0); // Para armazenar a largura do container
-  const [statusText, setStatusText] = useState("na fila"); // Texto inicial
-  const [buttonColor, setButtonColor] = useState("#333"); // Cor do botão que será alterada
-  const [statusContainerColor, setStatusContainerColor] = useState("#863A3A"); // Cor inicial do status container
-  const [fontsLoaded, setFontsLoaded] = useState(false); // Estado para verificar se as fontes foram carregadas
-  const slideAnim = useRef(new Animated.Value(0)).current; // Posição inicial do botão
-  const router = useRouter(); // Para redirecionar no Expo Router
-  const statusContainerWidth = 160; // Largura fixa do status container
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [statusText, setStatusText] = useState("na fila");
+  const [buttonColor, setButtonColor] = useState("#333");
+  const [statusContainerColor, setStatusContainerColor] = useState("#863A3A");
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const slideAnim = useRef(new Animated.Value(0)).current;
+  const router = useRouter();
+  const statusContainerWidth = 160;
 
   useEffect(() => {
     const loadFonts = async () => {
@@ -20,79 +20,70 @@ export default function OrderDetails() {
         "Funnel-Display": require("../assets/fonts/Funnel-Display.ttf"),
         "Sora-Regular": require("../assets/fonts/Sora-Regular.ttf"),
       });
-      setFontsLoaded(true); // Marca que as fontes foram carregadas
+      setFontsLoaded(true);
     };
 
     loadFonts();
 
-    // Inicia a animação após 2 segundos
     const timer = setTimeout(() => {
       Animated.timing(slideAnim, {
-        toValue: containerWidth - statusContainerWidth + 20, // Subtrai a largura do statusContainer e uma margem
-        duration: 5000, // Tempo da animação (5 segundos)
+        toValue: containerWidth - statusContainerWidth + 20,
+        duration: 5000,
         easing: Easing.linear,
         useNativeDriver: false,
       }).start();
     }, 2000);
 
-    // Atualizar o status e a cor do status container conforme o progresso da animação
     slideAnim.addListener(({ value }) => {
       const progress = (value / (containerWidth - statusContainerWidth + 20)) * 100;
 
       if (progress === 100) {
         setStatusText("concluído");
-        setStatusContainerColor("#377529"); // Cor verde para "concluído"
-        setButtonColor("#377529"); // Muda a cor do botão para verde
+        setStatusContainerColor("#377529");
+        setButtonColor("#377529");
       } else if (progress >= 10) {
         setStatusText("em reparo");
-        setStatusContainerColor("#856F30"); // Cor laranja para "em reparo"
-        setButtonColor("#333"); // Botão fica com a cor inicial
+        setStatusContainerColor("#856F30");
+        setButtonColor("#333");
       } else if (progress <= 25) {
         setStatusText("na fila");
-        setStatusContainerColor("#863A3A"); // Cor vermelha para "na fila"
-        setButtonColor("#333"); // Botão fica com a cor inicial
+        setStatusContainerColor("#863A3A");
+        setButtonColor("#333");
       }
     });
 
     return () => {
-      slideAnim.removeAllListeners(); // Limpar listeners quando não forem mais necessários
-      clearTimeout(timer); // Limpa o timer ao desmontar
+      slideAnim.removeAllListeners();
+      clearTimeout(timer);
     };
-  }, [containerWidth]); // Reexecutar quando containerWidth mudar
+  }, [containerWidth]);
 
   if (!fontsLoaded) {
-    return null; // Renderiza nada enquanto as fontes estão sendo carregadas
+    return null;
   }
 
-  // Função de redirecionamento condicional
   const handleButtonClick = () => {
     if (statusText === "concluído") {
-      router.push('/avaliacao'); // Redireciona para a avaliação usando o Expo Router
+      router.push("/avaliacao");
     } else {
-      alert("O pedido ainda não foi concluído!"); // Exibe um alerta caso o status não seja concluído
+      alert("O pedido ainda não foi concluído!");
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* Cabeçalho */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.menuButton} onPress={() => router.back()}>
           <MaterialIcons name="arrow-back" size={30} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.headerLogo}>
-          <Link href="/homepage">
-            <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
-          </Link>
+        <TouchableOpacity style={styles.headerLogo} onPress={() => router.push("/homepage")}>
+          <Image source={require('../assets/logo_blue.png')} style={styles.headerLogo} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuButton}>
-          <Link href="/perfil">
-            <MaterialIcons name="person" size={30} color="white" />
-          </Link>
+        <TouchableOpacity style={styles.menuButton} onPress={() => router.push("/perfil")}>
+          <MaterialIcons name="person" size={30} color="white" />
         </TouchableOpacity>
       </View>
 
-      {/* Informações do Cliente */}
       <View style={styles.clientInfo}>
         <Image source={require('../assets/julio.png')} style={styles.profileImage} />
         <View>
@@ -102,59 +93,39 @@ export default function OrderDetails() {
         </View>
       </View>
 
-      {/* Card do Pedido */}
       <View
         style={styles.orderCard}
-        onLayout={(event) => {
-          const { width } = event.nativeEvent.layout;
-          setContainerWidth(width); // Definir a largura do container
-        }}
+        onLayout={(event) => setContainerWidth(event.nativeEvent.layout.width)}
       >
         <View style={styles.sliderBackground}>
           <Animated.View style={[styles.statusContainer, { transform: [{ translateX: slideAnim }], backgroundColor: statusContainerColor }]}>
             <Text style={styles.status}>{statusText}</Text>
           </Animated.View>
         </View>
-        <Text style={styles.orderDescription}>
-          Galaxy S21 está apresentando {"\n"}
-          problemas na tela. A parte {"\n"}
-          superior está com um toque {"\n"}
-          fantasma.
-        </Text>
-        <TouchableOpacity
-          style={[styles.completeButton, { backgroundColor: buttonColor }]}
-          onPress={handleButtonClick} // Usa a função condicional para lidar com o clique
-        >
+        <Text style={styles.orderDescription}>Galaxy S21 está apresentando {"\n"} problemas na tela.</Text>
+        <TouchableOpacity style={[styles.completeButton, { backgroundColor: buttonColor }]} onPress={handleButtonClick}>
           <Text style={styles.completeButtonText}>Marcar como concluído</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/homepage">
-            <Image source={require("../assets/home.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/homepage")}>
+          <Image source={require("../assets/home.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/orderscreen">
-            <Image source={require("../assets/message.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/orderscreen")}>
+          <Image source={require("../assets/message.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/avaliacaoservico">
-            <Image source={require("../assets/star.png")} style={styles.footerIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/avaliacaoservico")}>
+          <Image source={require("../assets/star.png")} style={styles.footerIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Link href="/telapro">
-            <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
-          </Link>
+        <TouchableOpacity style={styles.footerButton} onPress={() => router.push("/telapro")}>
+          <Image source={require("../assets/pro.png")} style={styles.footerProIcon} />
         </TouchableOpacity>
       </View>
     </View>
   );
 }
+
 
 
 // Estilos da tela

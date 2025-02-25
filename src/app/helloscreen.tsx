@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import * as Font from 'expo-font';
 
 const HelloScreen = () => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     const loadFonts = async () => {
       await Font.loadAsync({
@@ -31,16 +31,12 @@ const HelloScreen = () => {
       />
       <Text style={styles.subtitle}>Cadastre-se ou realize {"\n"} o login para continuar</Text>
 
-      <TouchableOpacity style={styles.loginButton}>
-        <Link href="/loginscreen" style={styles.link}>
-          <Text style={styles.buttonText}>Login</Text>
-        </Link>
+      <TouchableOpacity style={styles.loginButton} onPress={() => router.push('/loginscreen')}>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.signUpButton}>
-        <Link href="/signupscreen" style={styles.link}>
-          <Text style={styles.buttonText}>Criar conta</Text>
-        </Link>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => router.push('/signupscreen')}>
+        <Text style={styles.buttonText}>Criar conta</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.continueWithoutLoginButton}>

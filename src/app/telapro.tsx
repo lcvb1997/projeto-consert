@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import * as Font from "expo-font"; // Importando a função para carregar fontes
 import { MaterialIcons } from "@expo/vector-icons"; // Importando o ícone de Material Icons
-import { Link } from "expo-router";
 import { useNavigation } from '@react-navigation/native';
 
 export default function PlanSubscription() {
