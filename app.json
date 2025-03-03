@@ -9,7 +9,7 @@
     "slug": "ConserT",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/ct-icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -26,7 +26,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./src/assets/images/icon.png"
+      "favicon": "./src/assets/images/ct-icon.png"
     },
     "plugins": [
       "expo-router",

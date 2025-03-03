@@ -1,20 +1,9 @@
 {
-  "profissionais": [
+  "contas": [
     {
       "id": 1,
-      "nome": "Júlio Cavalcante",
-      "rating": 5,
-      "cidade": "Quixadá-CE",
-      "descricao": "8 anos de experiência no setor de reparos eletrônicos com especialidade em Reparos de smartphones, tablets, notebooks, TVs de LED, LCD e Smart TVs.",
-      "formacao": "Curso Técnico em Eletrônica pelo SENAI."
-    },
-    {
-      "id": 2,
-      "nome": "Maria Oliveira",
-      "rating": 4.7,
-      "cidade": "Rio de Janeiro",
-      "descricao": "Designer UI/UX com experiência em aplicativos móveis.",
-      "formacao": "Graduação em Design"
+      "username": "usuario01@gmail.com",
+      "senha": "abcdefg"
     }
   ]
 }

@@ -1,10 +1,30 @@
-import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Linking } from 'react-native';
+import db from '../../db.json';
 
 const LoginScreen: React.FC = () => {
-  const router = useRouter(); // Inicializa o useRouter
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  const validarLogin = () => {
+    const conta = db.contas.find((conta) => conta.username === email);
+
+    // verificação p saber se o usuário foi encontrado e se a senha bate
+    if (conta) {
+      if (conta.senha === senha) {
+        Alert.alert('Sucesso', 'Login bem-sucedido!');
+        router.push("/homepage"); // Vai para a página principal se o login funcionar
+      } else {
+        Alert.alert('Erro', 'Senha incorreta!');
+      }
+    } else {
+      Alert.alert('Erro', 'Usuário não encontrado!');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -17,11 +37,22 @@ const LoginScreen: React.FC = () => {
       <Text style={styles.subtitle}>Preencha os dados</Text>
       
       <Text style={styles.label}>Email</Text>
-      <TextInput style={styles.input} placeholder="Digite seu email" />
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu email"
+        value={email}
+        onChangeText={setEmail}
+      />
       
       <Text style={styles.label}>Senha</Text>
       <View style={styles.passwordContainer}>
-        <TextInput style={styles.input} placeholder="Digite sua senha" secureTextEntry />
+        <TextInput
+          style={styles.input}
+          placeholder="Digite sua senha"
+          secureTextEntry
+          value={senha}
+          onChangeText={setSenha}
+        />
         <FontAwesome name="eye" size={20} color="black" style={styles.eyeIcon} />
       </View>
       
@@ -30,7 +61,7 @@ const LoginScreen: React.FC = () => {
         <Text style={styles.rememberText}>Lembrar login</Text>
       </View>
       
-      <TouchableOpacity style={styles.loginButton} onPress={() => router.push("/homepage")}>
+      <TouchableOpacity style={styles.loginButton} onPress={validarLogin}>
         <Text style={styles.buttonText}>ENTRAR</Text>
       </TouchableOpacity>
       
@@ -53,7 +84,6 @@ const LoginScreen: React.FC = () => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   logo: {
